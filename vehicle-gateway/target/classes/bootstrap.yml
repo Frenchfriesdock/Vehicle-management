@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: gateway
+  cloud:
+    nacos:
+      server-addr: 192.168.220.128:8848
+      config:
+        file-extension: yaml
+        group: DEFAULT_GROUP

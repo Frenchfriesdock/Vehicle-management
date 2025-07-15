@@ -1,0 +1,14 @@
+com\hosiky\common\constant\PasswordConstant.class
+com\hosiky\common\context\UserContext.class
+com\hosiky\common\interceptors\UserInfoInterceptor.class
+com\hosiky\common\utils\Convert.class
+com\hosiky\common\utils\UserContext.class
+com\hosiky\common\constant\MessageConstant.class
+com\hosiky\common\domain\Result.class
+com\hosiky\common\utils\BeanUtils.class
+com\hosiky\common\properties\AliOssProperties.class
+com\hosiky\common\constant\JwtClaimsConstant.class
+com\hosiky\common\utils\CollUtils.class
+com\hosiky\common\utils\CookieBuilder.class
+com\hosiky\common\config\MvcConfig.class
+com\hosiky\common\domain\PageResult.class
