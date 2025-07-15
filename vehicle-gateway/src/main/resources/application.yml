@@ -1,0 +1,38 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: gateway
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      server-addr: 192.168.220.128:8848
+      discovery:
+        enabled: true
+    gateway:
+      discovery:
+        locator:
+          enabled: true  # 支持根据服务名自动路由
+      default-filters:
+        - AddRequestHeader=key,value
+      routes:
+        - id: car-service
+          uri: lb://car-service
+          predicates:
+            - Path=/car/**
+        - id: carUser-service
+          uri: lb://carUser-service
+          predicates:
+            - Path=/carUser/**
+
+jwt:
+  secret-key: houkai
+  ttl: 7200000
+  token-name: token
+
+auth:
+  exclude-paths:
+    - /car/list
+    - /carUser/login
