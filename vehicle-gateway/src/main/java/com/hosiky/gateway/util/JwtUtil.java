@@ -8,6 +8,12 @@ import java.nio.charset.StandardCharsets;
 
 public class JwtUtil {
 
+    /**
+     * jwt验证的方法
+     * @param token
+     * @param secretKey
+     * @return
+     */
     public static boolean validateJwt(String token, String secretKey) {
         try {
             // 从密钥字符串生成 HMAC-SHA 签名密钥

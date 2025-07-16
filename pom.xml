@@ -13,7 +13,7 @@
     <modules>
         <module>car-service</module>
         <module>vehicle-common</module>
-        <module>carUser-service</module>
+        <module>sellers-service</module>
         <module>trade-service</module>
         <module>vehicle-gateway</module>
         <module>vehicle-api</module>

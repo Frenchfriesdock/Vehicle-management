@@ -22,17 +22,21 @@ spring:
           uri: lb://car-service
           predicates:
             - Path=/car/**
-        - id: carUser-service
-          uri: lb://carUser-service
+        - id: sellers-service
+          uri: lb://sellers-service
           predicates:
-            - Path=/carUser/**
+            - Path=/seller/**
 
 jwt:
   secret-key: houkai
   ttl: 7200000
   token-name: token
 
+# 白名单，不需要验证直接放行
+# 登录，注册，主页
 auth:
-  excludePaths:
+  exclude-paths:
+#
     - /car/list
-    - /carUser/login
+    - /seller/login
+    - /seller/register

@@ -8,10 +8,10 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="car-service" />
+        <module name="sellers-service" />
         <module name="vehicle-common" />
         <module name="vehicle-gateway" />
         <module name="trade-service" />
-        <module name="carUser-service" />
         <module name="vehicle-api" />
       </profile>
     </annotationProcessing>
@@ -22,8 +22,8 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="car-service" options="-parameters" />
-      <module name="carUser-service" options="-parameters" />
       <module name="hosiky" options="" />
+      <module name="sellers-service" options="-parameters" />
       <module name="trade-service" options="-parameters" />
       <module name="vehicle-api" options="-parameters" />
       <module name="vehicle-common" options="-parameters" />
