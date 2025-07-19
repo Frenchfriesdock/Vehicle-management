@@ -1,16 +1,26 @@
 package com.hosiky.car.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.hosiky.car.domain.dto.CarDTO;
-import com.hosiky.car.domain.dto.CarPageQueryDTO;
-import com.hosiky.car.domain.po.Car;
-import com.hosiky.common.domain.PageResult;
+import com.hosiky.car.domain.dto.CarRegisterDTO;
+import com.hosiky.car.domain.dto.CarUpdateDTO;
+import com.hosiky.car.domain.vo.CarDetailVO;
+import com.hosiky.car.domain.vo.CarListVO;
+import com.hosiky.common.entity.po.Cars;
+import org.springframework.web.multipart.MultipartFile;
 
-public interface ICarService extends IService<Car> {
+import java.math.BigInteger;
+import java.util.List;
 
-    void save(CarDTO carDTO);
+public interface ICarService extends IService<Cars> {
 
-    PageResult pageSelect(CarPageQueryDTO carPageQueryDTO);
+    void carRegister(CarRegisterDTO carRegisterDTO);
 
-    void update(CarDTO carDTO);
+    void updateCar(BigInteger id, CarUpdateDTO carUpdateDTO);
+
+    IPage<CarListVO> getAllCars(int current, int size);
+
+    CarDetailVO getCarDetailMessage(BigInteger id);
+
+    List<String> addImages(Long carId, MultipartFile[] files);
 }

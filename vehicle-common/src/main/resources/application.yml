@@ -3,9 +3,18 @@ server:
 
 spring:
   application:
-    name: trade-service
+    name: vehicle-common
+  profiles:
+    active: dev
+  mail:
+    username: ${cloud-music.mail.username}
+    password: ${cloud-music.mail.password}
+    host: ${cloud-music.mail.host}
 
-jwts:
-  secret-key: houkai
-  ttl: 7200000
-  token-name: token
+
+minio:
+  endpoint: ${cloud-music.minio.endpoint}
+  access-key: ${cloud-music.minio.access-key}
+  secret-key: ${cloud-music.minio.secret-key}
+  bucket-name: ${cloud-music.minio.bucket-name}
+  base-url: ${cloud-music.minio.base-url}

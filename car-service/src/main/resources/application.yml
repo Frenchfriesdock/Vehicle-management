@@ -15,6 +15,11 @@ spring:
     nacos:
       server-addr: 192.168.220.128 #nacos的配置
 
+  servlet:
+    multipart:
+      max-request-size: 200MB
+      max-file-size: 200MB
+
 feign:
   okhttp:
     enabled: true # 开启OKHttp功能

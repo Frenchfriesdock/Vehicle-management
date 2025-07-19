@@ -1,0 +1,12 @@
+vehicle-common:
+  mail:
+    username: hosiky@126.com
+    password: BFQZiSkWcfz25yWn
+    host: smtp.126.com
+
+  minio:
+    endpoint: localhost/9000
+    access-key: root
+    secret-key: password
+    bucket-name: cloud-music
+    base-url: localhost/cloud-music

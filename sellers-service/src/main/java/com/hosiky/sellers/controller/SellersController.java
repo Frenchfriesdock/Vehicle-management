@@ -70,8 +70,8 @@ public class SellersController {
     }
 
     @Operation(summary = "删除sellers信息")
-    @DeleteMapping("/id")
-    public Result deleteSellerById(Long id) {
+    @DeleteMapping("{/id}")
+    public Result deleteSellerById(@PathVariable Long id) {
 
         sellersService.removeById(id);
         return Result.success("根据id删除seller成功");
