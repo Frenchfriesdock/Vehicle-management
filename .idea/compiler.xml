@@ -7,11 +7,13 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="car-service" />
         <module name="sellers-service" />
         <module name="vehicle-common" />
         <module name="vehicle-gateway" />
         <module name="trade-service" />
+        <module name="inventories-service" />
+        <module name="car-service" />
+        <module name="buyers-service" />
         <module name="vehicle-api" />
       </profile>
     </annotationProcessing>
@@ -21,8 +23,10 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="buyers-service" options="-parameters" />
       <module name="car-service" options="-parameters" />
       <module name="hosiky" options="" />
+      <module name="inventories-service" options="-parameters" />
       <module name="sellers-service" options="-parameters" />
       <module name="trade-service" options="-parameters" />
       <module name="vehicle-api" options="-parameters" />

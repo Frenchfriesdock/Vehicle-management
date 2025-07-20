@@ -1,0 +1,22 @@
+feign:
+  client:
+    config:
+      # 全局默认
+      default:
+        connectTimeout: 2000          # 连接超时
+        readTimeout: 5000             # 读超时
+        loggerLevel: FULL             # 日志级别
+      # 针对单个服务（以 car-service 为例）
+      car-service:
+        connectTimeout: 1000
+        readTimeout: 3000
+        loggerLevel: HEADERS
+
+  httpclient:
+    enabled: true                     # 使用 Apache HttpClient
+    max-connections: 200
+    max-connections-per-route: 50
+
+logging:
+  level:
+    com.hosiky.api.client: DEBUG         # 打开 Feign 日志
