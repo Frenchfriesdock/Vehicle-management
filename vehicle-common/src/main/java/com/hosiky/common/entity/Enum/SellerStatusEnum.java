@@ -7,6 +7,8 @@ import lombok.Getter;
 
 /**
  * 车商账号状态枚举
+ *  同时也可以用到buyer上面
+ *  代码的复用
  */
 @Getter
 public enum SellerStatusEnum implements IEnum<String> {
