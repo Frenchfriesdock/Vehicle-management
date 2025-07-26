@@ -110,7 +110,7 @@ public class SellersServiceImpl extends ServiceImpl<SellersMapper, Sellers> impl
 
         Page<Sellers> sellersPage = lambdaQuery()
                 .select(Sellers::getId, Sellers::getEmail, Sellers::getCompanyName,
-                        Sellers::getContactName, Sellers::getStatus)
+                        Sellers::getContactName, Sellers::getStatus, Sellers::getCreatedAt, Sellers::getUpdatedAt)
                 .page(page);
 
         // 使用 IPage.convert 转换 VO

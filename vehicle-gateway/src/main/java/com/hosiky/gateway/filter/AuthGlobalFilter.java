@@ -43,12 +43,17 @@ public class AuthGlobalFilter implements GlobalFilter {
         // 从请求头中获取 JWT 令牌
         String token = request.getHeaders().getFirst(jwtProperties.getTokenName());
 
+
         // 验证令牌是否存在且有效
-        if(token != null || !JwtUtil.validateJwt(token, jwtProperties.getSecretKey())) {
+        if(token == null || !JwtUtil.validateJwt(token, jwtProperties.getSecretKey())) {
             ServerHttpResponse response = exchange.getResponse();
             response.setStatusCode(HttpStatus.UNAUTHORIZED);
             return response.setComplete(); // 返回 401 未授权
         }
+
+        System.out.println("请求路径: " + path);
+        System.out.println("token 值: " + token);
+
 
         // 验证通过，继续处理请求
         return chain.filter(exchange);

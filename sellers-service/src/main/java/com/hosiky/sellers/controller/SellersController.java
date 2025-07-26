@@ -29,9 +29,10 @@ import java.math.BigInteger;
 @RequiredArgsConstructor
 public class SellersController {
 
-
+    @Autowired
     private ISellersService sellersService;
 
+    @Autowired
     private JwtUtils jwtUtils;
 
     /**
@@ -49,7 +50,7 @@ public class SellersController {
     }
 
     @Operation(summary = "登录Sellers")
-    @GetMapping("/login")
+    @PostMapping("/login")
     public Result<SellerLoginVO> login(@RequestBody SellerLoginDTO sellerLoginDTO) {
         SellerLoginVO vo = sellersService.login(sellerLoginDTO);
         return Result.success(vo);
@@ -65,7 +66,7 @@ public class SellersController {
 
     @Operation(summary = "获取单个Sellers信息")
     @GetMapping("/id")
-    public Result<SellerProfileVO> getSellerById(Long id) {
+    public Result<SellerProfileVO> getSellerById(@RequestParam Long id) {
 
         SellerProfileVO sellerLoginVO = sellersService.getBySellerId(id);
         return Result.success(sellerLoginVO);

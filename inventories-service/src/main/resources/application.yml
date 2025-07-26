@@ -1,9 +1,9 @@
 server:
-  port: 8085
+  port: 8089
 
 spring:
   application:
-    name: car-service
+    name: inventories-service
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/vehicle_system
@@ -25,19 +25,6 @@ spring:
           auth: true
           starttls:
             enable: true
-
-minio:
-  endpoint: http://192.168.220.128:9000
-  access-key: minioadmin
-  secret-key: minioadmin
-  bucket-name: spring-vehicle
-  base-url: http://192.168.220.128:9000/spring-vehicle
-
-  servlet:
-    multipart:
-      max-request-size: 200MB
-      max-file-size: 200MB
-
 
 
 feign:
@@ -71,4 +58,4 @@ springdoc:
   group-configs:
     - group: 'default'
       paths-to-match: '/**'
-      packages-to-scan: com.hosiky.car.controller
+      packages-to-scan: com.hosiky.inventories.controller

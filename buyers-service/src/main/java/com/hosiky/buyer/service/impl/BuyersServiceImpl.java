@@ -10,6 +10,7 @@ import com.hosiky.common.entity.Enum.SellerStatusEnum;
 import com.hosiky.common.entity.po.Buyers;
 import com.hosiky.common.utils.BeanUtils;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -23,18 +24,27 @@ public class BuyersServiceImpl extends ServiceImpl<BuyersMapper, Buyers> impleme
 
     @Override
     public BuyersRegisterVo register(BuyersRegisterDTO buyersRegisterDTO) {
-        if(lambdaQuery().eq(Buyers::getEmail,buyersRegisterDTO.getEmail()).exists()) {
+        // 检查邮箱是否已注册
+        if (lambdaQuery().eq(Buyers::getEmail, buyersRegisterDTO.getEmail()).exists()) {
             throw new RuntimeException("邮箱已经被注册");
         }
 
+        // 检查密码是否为空
+        if (buyersRegisterDTO.getPasswordHash() == null) {
+            throw new IllegalArgumentException("密码不能为空");
+        }
+
         Buyers buyers = new Buyers();
-        BeanUtils.copyProperties(buyersRegisterDTO,buyers);
+        BeanUtils.copyProperties(buyersRegisterDTO, buyers);
+
+        // 加密密码
+        buyers.setPasswordHash(BCrypt.hashpw(buyersRegisterDTO.getPasswordHash(), BCrypt.gensalt()));
         buyers.setStatus(SellerStatusEnum.ACTIVE);
         buyers.setCreatedAt(LocalDateTime.now());
         buyers.setUpdatedAt(LocalDateTime.now());
-        buyersMapper.insert(buyers);
-        return BeanUtils.copyProperties(buyers,BuyersRegisterVo.class);
-    }
 
+        buyersMapper.insert(buyers);
+        return BeanUtils.copyProperties(buyers, BuyersRegisterVo.class);
+    }
 
 }

@@ -46,7 +46,7 @@ public class OrderController {
         return Result.success(orderService.getOrderVOById(orderId));
     }
 
-    @GetMapping("/user/{userId}")
+    @GetMapping("/user/{buyerId}")
     @Operation(summary = "获取用户订单列表")
     public Result<List<OrderVO>> getOrdersByUserId(@PathVariable Long buyerId) {
 

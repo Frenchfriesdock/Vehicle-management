@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 
 public class InventoriesServiceImpl extends ServiceImpl<InventoriesMapper, Inventories> implements InventoriesService {
 
-    private InventoriesMapper inventoriesMapper;
+    private final InventoriesMapper inventoriesMapper;
 
     @Override
     public InventoriesVO createInventories(InventoriesDTO inventoriesDTO) {

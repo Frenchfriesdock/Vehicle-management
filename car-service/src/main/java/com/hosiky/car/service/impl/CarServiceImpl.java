@@ -36,7 +36,7 @@ public class CarServiceImpl extends ServiceImpl<CarMapper, Cars> implements ICar
 
     private final CarMapper carMapper;
 
-    private MyMinioClient minioClient;
+    private final MyMinioClient minioClient;
 
     private final CarImageMapper carImageMapper;
 
@@ -93,8 +93,8 @@ public class CarServiceImpl extends ServiceImpl<CarMapper, Cars> implements ICar
         );
 
 //        装换对象为vo
-        carsPage.getRecords().stream()
-                .map(car ->{
+        List<CarListVO> voList = carsPage.getRecords().stream()
+                .map(car -> {
                     CarListVO carListVO = new CarListVO();
                     BeanUtils.copyProperties(car, carListVO);
 
@@ -102,7 +102,7 @@ public class CarServiceImpl extends ServiceImpl<CarMapper, Cars> implements ICar
                             new QueryWrapper<CarImages>().eq("car_id", car.getId())
                     );
 
-                    if(!images.isEmpty()){
+                    if (!images.isEmpty()) {
                         carListVO.setCoverImage(images.get(0).getUrl());
                     }
 
@@ -110,7 +110,7 @@ public class CarServiceImpl extends ServiceImpl<CarMapper, Cars> implements ICar
                 })
                 .collect(Collectors.toList());
 
-        resultPage.setRecords(resultPage.getRecords());
+        resultPage.setRecords(voList);
 
         return resultPage;
     }
@@ -144,6 +144,9 @@ public class CarServiceImpl extends ServiceImpl<CarMapper, Cars> implements ICar
         }
 
         ArrayList<String> urls = new ArrayList<>();
+        Integer maxSort = carImageMapper.selectMaxSortByCarId(carId);
+        int nextSort = (maxSort == null ? 0 : maxSort + 1);
+
         for(int i = 0; i < files.length; i++){
             try {
                 String url = minioClient.upload(files[i]);
@@ -152,8 +155,8 @@ public class CarServiceImpl extends ServiceImpl<CarMapper, Cars> implements ICar
                 CarImages carImages = new CarImages();
                 carImages.setCarId(BigInteger.valueOf(carId));
                 carImages.setUrl(url);
-                carImages.setSort(i);
-                carImages.setCreateAt(LocalDateTime.now());
+                carImages.setSort(nextSort + i);
+                carImages.setCreatedAt(LocalDateTime.now());
                 carImageMapper.insert(carImages);
 
             } catch (FileUploadException e) {

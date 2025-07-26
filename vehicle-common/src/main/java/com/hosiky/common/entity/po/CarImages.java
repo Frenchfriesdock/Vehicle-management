@@ -12,5 +12,5 @@ public class CarImages {
     private String url;
 //    用于图片排序（例如显示顺序），数值越小越靠前。
     private Integer sort;
-    private LocalDateTime createAt;
+    private LocalDateTime createdAt;
 }

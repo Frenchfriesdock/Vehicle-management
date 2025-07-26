@@ -33,19 +33,24 @@ spring:
         - id: trade-service
           uri: lb://trade-service
           predicates:
-            - Path=/api/order/**
+            - Path=/api/orders/**
+        - id: inventories-service
+          uri: lb://inventories-service
+          predicates:
+            - Path=/api/inventories/**
 
 
+# JWT配置
 jwt:
-  secret-key: houkai
-  ttl: 7200000
-  token-name: token
+  secret-key: houkaihoukaihoukaihoukaihoukaihoukai  # 密钥（实际生产环境建议使用复杂密钥并加密存储）
+  ttl: 7200000  # 令牌有效期（7200000毫秒 = 2小时）
+  token-name: token  # 请求头中的令牌键名（如Authorization: token值）
 
 # 白名单，不需要验证直接放行
 # 登录，注册，主页
 auth:
   exclude-paths:
 #
-    - /car/list
-    - /seller/login
-    - /seller/register
+    - /api/car/list
+    - /api/seller/login
+    - /api/seller/register

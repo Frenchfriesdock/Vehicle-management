@@ -7,7 +7,7 @@ public class BuyersRegisterDTO {
 
 
     private String email;
-    private String password;
+    private String passwordHash;
     private String fullName;
     private String phone;
 

@@ -7,6 +7,7 @@ import com.hosiky.car.domain.dto.CarRegisterDTO;
 import com.hosiky.car.domain.dto.CarUpdateDTO;
 import com.hosiky.car.domain.vo.CarDetailVO;
 import com.hosiky.car.domain.vo.CarListVO;
+import com.hosiky.car.service.ICarImageService;
 import com.hosiky.car.service.ICarService;
 import com.hosiky.common.client.MyMinioClient;
 import com.hosiky.common.domain.Result;
@@ -17,6 +18,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.tomcat.util.http.fileupload.FileUploadException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -25,7 +27,7 @@ import java.util.List;
 
 @Tag(name = "车辆管理")
 @RestController
-@RequestMapping("/car")
+@RequestMapping("/api/car")
 @Slf4j
 @CrossOrigin
 
@@ -34,7 +36,9 @@ public class CarController {
 
     private final ICarService carService;
 
-    private MyMinioClient minioClient;
+    private final MyMinioClient minioClient;
+
+    private final ICarImageService carImageService;
 
     @Operation(summary = "注册carRegister")
     @PostMapping
@@ -86,4 +90,12 @@ public class CarController {
         List<String> ImagesList = carService.addImages(carId,files);
         return Result.success(ImagesList);
     }
+
+    @Operation(summary = "删除汽车的照片")
+    @DeleteMapping("/{carId}/{sortId}")
+    public Result deleteCarImages(@PathVariable Long carId, @PathVariable Integer sortId) {
+        carImageService.deleteCarImages(carId,sortId);
+        return Result.success("删除成功");
+    }
+
 }

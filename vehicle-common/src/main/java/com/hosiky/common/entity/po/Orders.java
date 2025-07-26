@@ -16,7 +16,7 @@ public class Orders {
     private BigInteger sellerId;
     private BigInteger carId;
     private BigDecimal amount;
-    private OrderStatusEnum orderStatus;
+    private OrderStatusEnum status;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 

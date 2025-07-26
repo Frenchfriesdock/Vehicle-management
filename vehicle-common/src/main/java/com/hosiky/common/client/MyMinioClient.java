@@ -6,31 +6,23 @@ import io.minio.PutObjectArgs;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.tomcat.util.http.fileupload.FileUploadException;
-import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.UUID;
 
-@Component
-@RequiredArgsConstructor
 @Slf4j
-public class
-MyMinioClient {
+@RequiredArgsConstructor
+public class MyMinioClient {
 
-    private MinioClient minioClient;
-
+    private final MinioClient minioClient;
     private final MinioProperties minioProperties;
 
-
     public String upload(MultipartFile file) throws FileUploadException {
-        String fileName = generateFileName(file);
-        try (InputStream inputStream = file.getInputStream()){
+        String fileName = UUID.randomUUID() + "-" + file.getOriginalFilename();
+        try (InputStream inputStream = file.getInputStream()) {
             minioClient.putObject(
-                    PutObjectArgs
-                            .builder()
+                    PutObjectArgs.builder()
                             .bucket(minioProperties.getBucketName())
                             .object(fileName)
                             .stream(inputStream, file.getSize(), -1)
@@ -38,16 +30,9 @@ MyMinioClient {
                             .build()
             );
         } catch (Exception e) {
-            log.error("Error occurred while uploading file to MinIO: {}", fileName, e);
-            throw new FileUploadException("failed to upload file to minio" + fileName, e);
+            log.error("上传失败: {}", fileName, e);
+            throw new FileUploadException("上传失败: " + fileName, e);
         }
-
-        return String.format("%s/%s", minioProperties.getBaseUrl(), fileName);
+        return minioProperties.getBaseUrl() + "/" + fileName;
     }
-
-    private String generateFileName(MultipartFile file) {
-
-        return UUID.randomUUID() + "-" + file.getOriginalFilename();
-    }
-
 }

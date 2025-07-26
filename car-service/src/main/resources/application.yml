@@ -26,29 +26,33 @@ spring:
           starttls:
             enable: true
 
-  minio:
-    endpoint: http://192.168.220.128:9000
-    access-key: minioadmin
-    secret-key: minioadmin
-    bucket-name: spring-vehicle
-    base-url: http://192.168.220.128/spring-vehicle
-
+minio:
+  endpoint: http://192.168.220.128:9000
+  access-key: minioadmin
+  secret-key: minioadmin
+  bucket-name: spring-vehicle
+  base-url: http://192.168.220.128:9000/spring-vehicle
 
   servlet:
     multipart:
       max-request-size: 200MB
       max-file-size: 200MB
 
+
+
 feign:
   okhttp:
     enabled: true # 开启OKHttp功能
 
 mybatis-plus:
-  mapper-locations: classpath:mapper/*.xml
+  mapper-locations: classpath:mapper/*.xml  # mapper.xml文件路径
+  type-enums-package: com.hosiky.common.entity.Enum
   configuration:
-    map-underscore-to-camel-case: false
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-
+    map-underscore-to-camel-case: true  # 关闭驼峰命名转换（根据实际需求调整）
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl  # 控制台打印SQL日志
+  global-config:
+    db-config:
+      id-type: auto  # 主键自增（根据数据库类型调整）
 
 logging:
   level:

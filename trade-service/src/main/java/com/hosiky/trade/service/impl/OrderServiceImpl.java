@@ -27,7 +27,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Orders> implement
 
         Orders orders = new Orders();
         orders.setOrderNo(orderNo);
-        orders.setOrderStatus(OrderStatusEnum.UNPAID);
+        orders.setStatus(OrderStatusEnum.UNPAID);
         BeanUtils.copyProperties(createDTO, orders);
         this.save(orders);
     }
@@ -44,9 +44,9 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Orders> implement
         }
 
 //        转态流转校验
-        validateStatusTransition(orders.getOrderStatus(),status);
+        validateStatusTransition(orders.getStatus(),status);
 
-        orders.setOrderStatus(status);
+        orders.setStatus(status);
         this.updateById(orders);
     }
 
