@@ -21,11 +21,20 @@ spring:
         - id: car-service
           uri: lb://car-service
           predicates:
-            - Path=/car/**
+            - Path=/api/car/**
         - id: sellers-service
           uri: lb://sellers-service
           predicates:
-            - Path=/seller/**
+            - Path=/api/seller/**
+        - id: buyers-service
+          uri: lb://buyers-service
+          predicates:
+            - Path=/api/buyer/**
+        - id: trade-service
+          uri: lb://trade-service
+          predicates:
+            - Path=/api/order/**
+
 
 jwt:
   secret-key: houkai

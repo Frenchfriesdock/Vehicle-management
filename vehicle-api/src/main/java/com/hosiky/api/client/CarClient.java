@@ -13,6 +13,7 @@ import java.util.List;
 /**
  * openFeign的远程调用
  * 把远程调用组件变成本地调用
+ * 向其他服务体统Cars相关接口
  *
  */
 @FeignClient(
@@ -20,6 +21,7 @@ import java.util.List;
         path = "/api",                   // 统一前缀
         configuration = FeignConfig.class   // 个性化配置
 )
+
 public interface CarClient {
 
     @GetMapping("/cars/{id}")
@@ -27,4 +29,6 @@ public interface CarClient {
 
     @PostMapping("/cars")
     Result<CarDTO> createCar(@RequestBody CarDTO dto);
+
+
 }

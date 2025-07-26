@@ -4,13 +4,14 @@ import com.hosiky.common.constant.MailConstant;
 import lombok.RequiredArgsConstructor;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
 public class MailClient {
 
-    private final MailSender mailSender;
+    private final JavaMailSender mailSender;
 
     public void sendMail(String to, String code) {
         SimpleMailMessage message = new SimpleMailMessage();

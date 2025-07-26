@@ -19,6 +19,7 @@
         <module>vehicle-api</module>
         <module>inventories-service</module>
         <module>buyers-service</module>
+        <module>chat-gateway</module>
     </modules>
 
     <parent>

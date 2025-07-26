@@ -28,4 +28,6 @@ public class BuyersController {
         return Result.success(buyerService.register(buyersRegisterDTO));
     }
 
+
+
 }

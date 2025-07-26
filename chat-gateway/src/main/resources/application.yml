@@ -1,0 +1,29 @@
+
+spring:
+  application:
+    name: chat-gateway
+  cloud:
+    nacos:
+      config:
+        server-addr: 192.168.220.128:8848
+        namespace: public
+        group: DEFAULT_GROUP
+        file-extension: yaml
+      discovery:
+        server-addr: 192.168.220.128:8848
+  config:
+    import: optional:nacos:rocketmq-config.yaml
+
+rocketmq:
+  name-server: 192.168.220.128:9876
+  producer:
+    group: chat-producer-group
+  consumer:
+    group: chat-consumer-group
+
+logging:
+  level:
+    org.apache.rocketmq.spring: DEBUG
+
+server:
+  port: 8084

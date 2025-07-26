@@ -14,6 +14,30 @@ spring:
   cloud:
     nacos:
       server-addr: 192.168.220.128 #nacos的配置
+  mail:
+    host: smtp.126.com
+    port: 587
+    username: hosiky@126.com
+    password: BFQZiSkWcfz25yWn
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+  minio:
+    endpoint: http://192.168.220.128:9000
+    access-key: minioadmin
+    secret-key: minioadmin
+    bucket-name: spring-vehicle
+    base-url: http://192.168.220.128/spring-vehicle
+
+
+  servlet:
+    multipart:
+      max-request-size: 200MB
+      max-file-size: 200MB
 
 feign:
   okhttp:

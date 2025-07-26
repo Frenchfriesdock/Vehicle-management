@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: chat-service
+  cloud:
+    nacos:
+      config:
+        server-addr: 192.168.220.128:8848
+        file-extension: yaml
+      discovery:
+        server-addr:192.168.220.128:8848
+  config:
+    import: optional:nacos:rocketmq-config.yaml   # 关键：引入上一步的配置

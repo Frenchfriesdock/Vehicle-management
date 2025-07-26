@@ -35,4 +35,5 @@ public class InventoriesController {
         return inventoriesService.detail(id);
     }
 
+
 }

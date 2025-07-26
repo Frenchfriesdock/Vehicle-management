@@ -1,0 +1,73 @@
+server:
+  port: 8087  # 服务端口
+
+spring:
+  application:
+    name: buyers-service  # 服务名称（nacos注册用）
+  datasource:  # 数据库配置
+    driver-class-name: com.mysql.cj.jdbc.Driver  # MySQL8+ 驱动
+    url: jdbc:mysql://localhost:3306/vehicle_system?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai  # 补充时区和编码参数
+    username: root
+    password: 1234
+#  profiles:
+#    active: dev  # 激活的环境（如dev/test/prod）
+
+  mail:
+    host: smtp.126.com
+    port: 587
+    username: hosiky@126.com
+    password: BFQZiSkWcfz25yWn
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+  minio:
+    endpoint: http://192.168.220.128:9000
+    access-key: minioadmin
+    secret-key: minioadmin
+    bucket-name: spring-vehicle
+    base-url: http://192.168.220.128/spring-vehicle
+
+  cloud:
+    nacos:
+      server-addr: 192.168.220.128:8848  # nacos服务地址（含端口）
+      discovery:
+        enabled: true  # 开启nacos服务发现（默认true，可省略）\
+
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml  # mapper.xml文件路径
+  type-enums-package: com.hosiky.common.entity.Enum
+  configuration:
+    map-underscore-to-camel-case: true  # 关闭驼峰命名转换（根据实际需求调整）
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl  # 控制台打印SQL日志
+  global-config:
+    db-config:
+      id-type: auto  # 主键自增（根据数据库类型调整）
+
+logging:
+  level:
+    com.hosiky.buyer.mapper: debug  # mapper层日志级别（打印SQL）
+    com.hosiky.buyer.service: info   # service层日志级别
+    com.hosiky.buyer.controller: info  # controller层日志级别
+
+# Knife4j/Swagger配置（基于springdoc-openapi）
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html  # swagger-ui访问路径
+    tags-sorter: alpha  # 标签排序
+    operations-sorter: alpha  # 接口排序
+  api-docs:
+    path: /v3/api-docs  # 接口文档JSON路径
+  group-configs:
+    - group: 'default'  # 接口分组
+      paths-to-match: '/**'  # 匹配所有接口
+      packages-to-scan: com.hosiky.buyer.controller  # 扫描的controller包
+
+# JWT配置
+jwt:
+  secret-key: houkaihoukaihoukaihoukaihoukaihoukai  # 密钥（实际生产环境建议使用复杂密钥并加密存储）
+  ttl: 7200000  # 令牌有效期（7200000毫秒 = 2小时）
+  token-name: token  # 请求头中的令牌键名（如Authorization: token值）

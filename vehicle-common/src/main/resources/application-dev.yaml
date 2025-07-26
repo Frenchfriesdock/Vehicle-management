@@ -1,12 +1,20 @@
+
 vehicle-common:
   mail:
+    host: smtp.126.com
+    port: 587
     username: hosiky@126.com
     password: BFQZiSkWcfz25yWn
-    host: smtp.126.com
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
 
   minio:
-    endpoint: localhost/9000
-    access-key: root
-    secret-key: password
-    bucket-name: cloud-music
-    base-url: localhost/cloud-music
+    endpoint: http://192.168.220.128:9000
+    access-key: minioadmin
+    secret-key: minioadmin
+    bucket-name: spring-vehicle
+    base-url: http://192.168.220.128/spring-vehicle

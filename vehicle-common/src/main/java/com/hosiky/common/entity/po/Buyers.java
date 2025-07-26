@@ -1,11 +1,13 @@
 package com.hosiky.common.entity.po;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.hosiky.common.entity.Enum.SellerStatusEnum;
 import lombok.Data;
 
 import java.time.LocalDateTime;
 
 @Data
+@TableName("buyers")
 public class Buyers {
     private Long id;
     private String email;

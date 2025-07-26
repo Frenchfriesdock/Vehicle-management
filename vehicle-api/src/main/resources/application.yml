@@ -1,3 +1,4 @@
+
 feign:
   client:
     config:
@@ -20,3 +21,7 @@ feign:
 logging:
   level:
     com.hosiky.api.client: DEBUG         # 打开 Feign 日志
+
+
+server:
+  port: 8083

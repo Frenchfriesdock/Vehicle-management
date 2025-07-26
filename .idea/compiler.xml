@@ -15,16 +15,20 @@
         <module name="car-service" />
         <module name="buyers-service" />
         <module name="vehicle-api" />
+        <module name="chat-gateway" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="17">
+      <module name="buyer-service" target="17" />
       <module name="car-serviece" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="buyer-service" options="-parameters" />
       <module name="buyers-service" options="-parameters" />
       <module name="car-service" options="-parameters" />
+      <module name="chat-gateway" options="-parameters" />
       <module name="hosiky" options="" />
       <module name="inventories-service" options="-parameters" />
       <module name="sellers-service" options="-parameters" />

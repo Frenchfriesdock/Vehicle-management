@@ -10,7 +10,9 @@ import com.hosiky.sellers.service.ISellersService;
 import com.hosiky.sellers.utils.JwtUtils;
 import com.hosiky.common.domain.Result;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,18 +20,18 @@ import org.springframework.web.bind.annotation.*;
 
 import java.math.BigInteger;
 
-
+@Tag(name = "Seller管理")
 @RestController
-@RequestMapping("/seller")
+@RequestMapping("/api/seller")
 @Slf4j
 @CrossOrigin(maxAge = 3600)
 
+@RequiredArgsConstructor
 public class SellersController {
 
-    @Autowired
+
     private ISellersService sellersService;
 
-    @Autowired
     private JwtUtils jwtUtils;
 
     /**
@@ -70,7 +72,7 @@ public class SellersController {
     }
 
     @Operation(summary = "删除sellers信息")
-    @DeleteMapping("{/id}")
+    @DeleteMapping("/{id}")
     public Result deleteSellerById(@PathVariable Long id) {
 
         sellersService.removeById(id);

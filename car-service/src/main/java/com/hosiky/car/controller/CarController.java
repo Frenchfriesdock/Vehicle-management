@@ -59,7 +59,7 @@ public class CarController {
         return Result.success(carListVOIPage);
     }
 
-    @PutMapping("/{id}")
+    @DeleteMapping("/{id}")
     @Operation(summary = "删除car信息")
     public Result deleteCar (@PathVariable  BigInteger id) {
         carService.removeById(id);
