@@ -10,6 +10,7 @@ import com.hosiky.car.domain.dto.CarRegisterDTO;
 import com.hosiky.car.domain.dto.CarUpdateDTO;
 import com.hosiky.car.domain.vo.CarDetailVO;
 import com.hosiky.car.domain.vo.CarListVO;
+import com.hosiky.car.domain.vo.CarVO;
 import com.hosiky.car.mapper.CarImageMapper;
 import com.hosiky.car.mapper.CarMapper;
 import com.hosiky.car.service.ICarService;
@@ -41,7 +42,7 @@ public class CarServiceImpl extends ServiceImpl<CarMapper, Cars> implements ICar
     private final CarImageMapper carImageMapper;
 
     @Override
-    public void carRegister(CarRegisterDTO carRegisterDTO) {
+    public CarVO carRegister(CarRegisterDTO carRegisterDTO) {
         Cars car = new Cars();
         BeanUtils.copyProperties(carRegisterDTO, car);
 
@@ -49,6 +50,10 @@ public class CarServiceImpl extends ServiceImpl<CarMapper, Cars> implements ICar
         car.setCreatedAt(LocalDateTime.now());
         car.setUpdatedAt(LocalDateTime.now());
         this.save(car);
+
+        CarVO carVO = new CarVO();
+        BeanUtils.copyProperties(car, carVO);
+        return carVO;
     }
 
     @Override

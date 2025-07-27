@@ -6,6 +6,7 @@ import com.hosiky.car.domain.dto.CarRegisterDTO;
 import com.hosiky.car.domain.dto.CarUpdateDTO;
 import com.hosiky.car.domain.vo.CarDetailVO;
 import com.hosiky.car.domain.vo.CarListVO;
+import com.hosiky.car.domain.vo.CarVO;
 import com.hosiky.common.entity.po.Cars;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -14,7 +15,7 @@ import java.util.List;
 
 public interface ICarService extends IService<Cars> {
 
-    void carRegister(CarRegisterDTO carRegisterDTO);
+    CarVO carRegister(CarRegisterDTO carRegisterDTO);
 
     void updateCar(BigInteger id, CarUpdateDTO carUpdateDTO);
 

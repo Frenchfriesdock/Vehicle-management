@@ -7,6 +7,7 @@ import com.hosiky.car.domain.dto.CarRegisterDTO;
 import com.hosiky.car.domain.dto.CarUpdateDTO;
 import com.hosiky.car.domain.vo.CarDetailVO;
 import com.hosiky.car.domain.vo.CarListVO;
+import com.hosiky.car.domain.vo.CarVO;
 import com.hosiky.car.service.ICarImageService;
 import com.hosiky.car.service.ICarService;
 import com.hosiky.common.client.MyMinioClient;
@@ -42,9 +43,9 @@ public class CarController {
 
     @Operation(summary = "注册carRegister")
     @PostMapping
-    public Result<Cars> carRegister(@RequestBody CarRegisterDTO carRegisterDTO) {
-        carService.carRegister(carRegisterDTO);
-        return Result.success();
+    public Result<CarVO> carRegister(@RequestBody CarRegisterDTO carRegisterDTO) {
+        CarVO carVO = carService.carRegister(carRegisterDTO);
+        return Result.success(carVO);
     }
 
     @Operation(summary = "update Car message")

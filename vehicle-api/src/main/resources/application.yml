@@ -25,3 +25,10 @@ logging:
 
 server:
   port: 8083
+
+spring:
+  application:
+    name: vehicle-api
+  cloud:
+    nacos:
+      server-addr: 192.168.220.128 #nacos的配置

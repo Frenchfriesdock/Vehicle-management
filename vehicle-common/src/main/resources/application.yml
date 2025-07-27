@@ -11,10 +11,13 @@ spring:
     password: ${cloud-music.mail.password}
     host: ${cloud-music.mail.host}
 
-
 minio:
   endpoint: ${cloud-music.minio.endpoint}
   access-key: ${cloud-music.minio.access-key}
   secret-key: ${cloud-music.minio.secret-key}
-  bucket-name: ${cloud-music.minio.bucket-name}
+  bucket-name: ${cloud-music.minio.bucket-name}RedisConfig
   base-url: ${cloud-music.minio.base-url}
+
+redis:
+  host: localhost
+  port: 6379

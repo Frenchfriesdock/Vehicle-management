@@ -1,11 +1,16 @@
 package com.hosiky.api.client;
 
 
+
 import com.hosiky.api.config.FeignConfig;
-import com.hosiky.api.dto.CarDTO;
+import com.hosiky.api.domain.dto.CarRegisterDTO;
+import com.hosiky.api.domain.vo.CarVO;
 import com.hosiky.common.domain.Result;
+import com.hosiky.common.entity.po.Cars;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Collection;
 import java.util.List;
@@ -24,11 +29,7 @@ import java.util.List;
 
 public interface CarClient {
 
-    @GetMapping("/cars/{id}")
-    Result<CarDTO> getCar(@PathVariable Long id);
-
-    @PostMapping("/cars")
-    Result<CarDTO> createCar(@RequestBody CarDTO dto);
-
+    @PostMapping("/car")
+    public Result<CarVO> carRegister(@RequestBody CarRegisterDTO carRegisterDTO);
 
 }
