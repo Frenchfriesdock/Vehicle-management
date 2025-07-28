@@ -1,10 +1,14 @@
 package com.hosiky.sellers.service.impl;
 
 
+import cn.hutool.core.util.RandomUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
+import com.hosiky.common.client.MailClient;
+import com.hosiky.common.client.RedisClient;
+import com.hosiky.common.constant.RedisConstant;
 import com.hosiky.common.entity.Enum.SellerStatusEnum;
 import com.hosiky.sellers.domain.dto.SellerLoginDTO;
 import com.hosiky.sellers.domain.dto.SellerRegisterDTO;
@@ -19,27 +23,51 @@ import com.hosiky.common.entity.po.Sellers;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.util.Map;
+import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 @Service
 @RequiredArgsConstructor
 public class SellersServiceImpl extends ServiceImpl<SellersMapper, Sellers> implements ISellersService {
 
-    @Autowired
-    private JwtUtils jwtUtils;
-    @Autowired
-    private JwtProperties jwtProperties;
+
+    private final JwtUtils jwtUtils;
+
+    private final JwtProperties jwtProperties;
+
+    private final RedisClient redisClient;
+
+    private final MailClient mailClient;
+
 
     @Override
     public void register(SellerRegisterDTO sellerRegisterDTO) {
-        if(lambdaQuery().eq(Sellers::getEmail,sellerRegisterDTO.getEmail()).exists()){
-            throw new RuntimeException("邮箱已经被注册");
+
+
+        String code = sellerRegisterDTO.getCode();
+        String email = sellerRegisterDTO.getEmail();
+
+        String verificationCode = (String) redisClient.get(RedisConstant.SELLER_CODE + email);
+
+        if(Objects.isNull(verificationCode) || !verificationCode.equals(code)) {
+            throw new RuntimeException("verification code error");
         }
+
+        Sellers seller = lambdaQuery()
+                .eq(Sellers::getEmail, email)
+                .one();
+
+        if(Objects.nonNull(seller)) {
+            throw new RuntimeException("sellers exist");
+        }
+
 
         Sellers sellers = new Sellers();
         BeanUtils.copyProperties(sellerRegisterDTO,sellers);
@@ -52,9 +80,18 @@ public class SellersServiceImpl extends ServiceImpl<SellersMapper, Sellers> impl
 
         this.save(sellers);
 
+//        自动清除验证码
+        redisClient.delete(RedisConstant.SELLER_CODE + email);
+
     }
 
+    /**
+     * TODO 可以在这里把jwt存在网关里面去
+     * @param sellerLoginDTO
+     * @return
+     */
     @Override
+    @Cacheable(value = RedisConstant.SELLER_CODE, key = "#sellerLoginDTO.email")
     public SellerLoginVO login(SellerLoginDTO sellerLoginDTO) {
 //        1 查账号
         Sellers seller = lambdaQuery()
@@ -81,6 +118,13 @@ public class SellersServiceImpl extends ServiceImpl<SellersMapper, Sellers> impl
 
         LocalDateTime expireAt = LocalDateTime.now().plusSeconds(jwtProperties.getTtl() / 1000);
 
+        // 4. 写 Redis（核心改动）
+        redisClient.set(
+                RedisConstant.SELLER_TOKEN + seller.getEmail(),
+                token,
+                jwtProperties.getTtl() / 1000,
+                TimeUnit.SECONDS
+        );
 
         boolean updated = lambdaUpdate()
                 .eq(Sellers::getId, seller.getId())
@@ -149,6 +193,33 @@ public class SellersServiceImpl extends ServiceImpl<SellersMapper, Sellers> impl
         BeanUtils.copyProperties(sellers, profileVO);
         return profileVO;
 
+    }
+
+    @Override
+    public void sendCode(String email) {
+        // 锁标识的键
+        String lockKey = RedisConstant.SELLER_CODE_LOCK + email;
+        // 验证码的键
+        String codeKey = RedisConstant.SELLER_CODE + email;
+
+        // 检查是否已经存在锁标识
+        if(redisClient.hasKey(lockKey)){
+            throw new RuntimeException("验证码已发送，请1分钟后再试");
+        }
+
+        // 生成验证码
+        String code = generateCode();
+
+        // 将验证码存入 Redis
+        redisClient.set(codeKey, code, 5, TimeUnit.MINUTES);
+        // 设置锁标识，防止短时间内重复发送验证码
+        redisClient.set(lockKey, "1", 1, TimeUnit.MINUTES);
+
+        // 发送邮件
+        mailClient.sendMail(email, code);
+    }
+    private String generateCode() {
+        return RandomUtil.randomNumbers(6);
     }
 
 

@@ -1,7 +1,10 @@
 com\hosiky\trade\service\impl\OrderServiceImpl.class
+com\hosiky\trade\utils\OrderNoGenerator.class
 com\hosiky\trade\mapper\OrderMapper.class
 com\hosiky\trade\service\IOrderService.class
-com\hosiky\trade\domain\dto\OrderPageQueryDTO.class
 com\hosiky\trade\TradeApplication.class
-com\hosiky\trade\domain\po\Order.class
+com\hosiky\trade\domain\vo\OrderVO.class
+com\hosiky\trade\service\impl\OrderServiceImpl$1.class
 com\hosiky\trade\controller\OrderController.class
+com\hosiky\trade\domain\dto\OrderCreateDTO.class
+com\hosiky\trade\domain\dto\OrderUpdateStatusDTO.class

@@ -9,6 +9,7 @@ import com.hosiky.sellers.domain.vo.SellerLoginVO;
 import com.hosiky.common.entity.po.Sellers;
 import com.hosiky.sellers.domain.vo.SellerProfileVO;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
 
 import java.math.BigInteger;
 
@@ -24,4 +25,6 @@ public interface ISellersService extends IService<Sellers> {
     SellerProfileVO getBySellerId(Long id);
 
     SellerProfileVO updateSellers(BigInteger id, @Valid SellerUpdateDTO sellerUpdateDTO);
+
+    void sendCode(@NotBlank String email);
 }

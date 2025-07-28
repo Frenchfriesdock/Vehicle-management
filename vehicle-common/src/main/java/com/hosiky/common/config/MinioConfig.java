@@ -3,10 +3,12 @@ package com.hosiky.common.config;
 import com.hosiky.common.client.MyMinioClient;
 import com.hosiky.common.properties.MinioProperties;
 import io.minio.MinioClient;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration   // 告诉 Spring 这是一个配置类
+@EnableConfigurationProperties(MinioProperties.class)
 public class MinioConfig {
 
     @Bean

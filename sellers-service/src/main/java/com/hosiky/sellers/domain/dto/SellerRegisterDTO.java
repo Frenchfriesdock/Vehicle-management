@@ -13,9 +13,10 @@ public class SellerRegisterDTO {
     @NotBlank
     @Size(min = 6, max = 32)
     private String passwordHash;
-    @NotBlank
+
+    private String code;
+
     private String companyName;
     private String contactName;
-
     private String phone;
 }

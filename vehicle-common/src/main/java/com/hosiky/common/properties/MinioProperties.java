@@ -5,9 +5,8 @@ import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
-@Component
 @Data
-@ConfigurationProperties("minio")
+@ConfigurationProperties(prefix = "minio")
 public class MinioProperties {
 
     private String endpoint;

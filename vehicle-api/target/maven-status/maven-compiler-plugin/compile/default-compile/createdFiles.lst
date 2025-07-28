@@ -1,2 +1,12 @@
+com\hosiky\api\client\SellersClient.class
+com\hosiky\api\domain\dto\InventoriesDTO.class
+com\hosiky\api\client\BuyerClient.class
+com\hosiky\api\domain\vo\InventoriesVO.class
+com\hosiky\api\config\FeignConfig.class
+com\hosiky\api\domain\vo\CarVO.class
+com\hosiky\api\aggregate\VehicleAggregateController.class
+com\hosiky\api\domain\dto\CarRegisterDTO.class
+com\hosiky\api\client\InventoriesClient.class
+com\hosiky\api\domain\dto\VehicleRegisterRequestDTO.class
 com\hosiky\api\client\CarClient.class
-com\hosiky\api\dto\CarDTO.class
+com\hosiky\api\SpringApiFeignApplication.class

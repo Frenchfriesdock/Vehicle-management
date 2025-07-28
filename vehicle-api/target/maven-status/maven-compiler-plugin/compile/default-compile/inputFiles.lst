@@ -1,2 +1,12 @@
-F:\develop\hosiky\springcloud\vehicle_management\vehicle-api\src\main\java\com\hosiky\api\dto\CarDTO.java
+F:\develop\hosiky\springcloud\vehicle_management\vehicle-api\src\main\java\com\hosiky\api\config\FeignConfig.java
+F:\develop\hosiky\springcloud\vehicle_management\vehicle-api\src\main\java\com\hosiky\api\domain\dto\CarRegisterDTO.java
+F:\develop\hosiky\springcloud\vehicle_management\vehicle-api\src\main\java\com\hosiky\api\client\SellersClient.java
+F:\develop\hosiky\springcloud\vehicle_management\vehicle-api\src\main\java\com\hosiky\api\SpringApiFeignApplication.java
+F:\develop\hosiky\springcloud\vehicle_management\vehicle-api\src\main\java\com\hosiky\api\client\InventoriesClient.java
+F:\develop\hosiky\springcloud\vehicle_management\vehicle-api\src\main\java\com\hosiky\api\domain\dto\InventoriesDTO.java
+F:\develop\hosiky\springcloud\vehicle_management\vehicle-api\src\main\java\com\hosiky\api\domain\vo\InventoriesVO.java
 F:\develop\hosiky\springcloud\vehicle_management\vehicle-api\src\main\java\com\hosiky\api\client\CarClient.java
+F:\develop\hosiky\springcloud\vehicle_management\vehicle-api\src\main\java\com\hosiky\api\aggregate\VehicleAggregateController.java
+F:\develop\hosiky\springcloud\vehicle_management\vehicle-api\src\main\java\com\hosiky\api\client\BuyerClient.java
+F:\develop\hosiky\springcloud\vehicle_management\vehicle-api\src\main\java\com\hosiky\api\domain\vo\CarVO.java
+F:\develop\hosiky\springcloud\vehicle_management\vehicle-api\src\main\java\com\hosiky\api\domain\dto\VehicleRegisterRequestDTO.java

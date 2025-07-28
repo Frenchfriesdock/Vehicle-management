@@ -9,6 +9,11 @@ spring:
     url: jdbc:mysql://localhost:3306/vehicle_system?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai  # 补充时区和编码参数
     username: root
     password: 1234
+  data:
+    redis:
+      host: 127.0.0.1
+      port: 6379
+
   profiles:
     active: dev  # 激活的环境（如dev/test/prod）
   cloud:
@@ -18,7 +23,6 @@ spring:
         enabled: true  # 开启nacos服务发现（默认true，可省略）
   mail:
     host: smtp.126.com
-    port: 587
     username: hosiky@126.com
     password: BFQZiSkWcfz25yWn
     properties:
@@ -26,14 +30,14 @@ spring:
         smtp:
           auth: true
           starttls:
-            enable: true
 
-  minio:
-    endpoint: http://192.168.220.128:9000
-    access-key: minioadmin
-    secret-key: minioadmin
-    bucket-name: spring-vehicle
-    base-url: http://192.168.220.128/spring-vehicle
+
+minio:
+  endpoint: http://192.168.220.128:9000
+  access-key: minioadmin
+  secret-key: minioadmin
+  bucket-name: spring-vehicle
+  base-url: http://192.168.220.128/spring-vehicle
 
 
 mybatis-plus:

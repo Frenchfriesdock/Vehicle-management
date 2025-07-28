@@ -12,6 +12,7 @@ import com.hosiky.common.domain.Result;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.annotations.Update;
@@ -85,5 +86,11 @@ public class SellersController {
                                                     @RequestBody @Valid SellerUpdateDTO sellerUpdateDTO) {
         SellerProfileVO sellerProfileVO = sellersService.updateSellers(id,sellerUpdateDTO);
         return Result.success(sellerProfileVO);
+    }
+
+    @GetMapping("/sendCode")
+    public Result sendCode(@RequestParam @NotBlank String email) {
+        sellersService.sendCode(email);
+        return Result.success();
     }
 }
