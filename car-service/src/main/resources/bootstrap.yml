@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: car-service          # 对应 Nacos 的 DataID 前缀
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      server-addr: 192.168.220.128:8848
+      config:
+        file-extension: yaml   # 后缀
+        shared-configs:        # 公共配置
+          - data-id: application-common.yaml
+            group: DEFAULT_GROUP
+            refresh: true       # 开启热刷新
+  config:
+    import: "nacos:"            # Spring Boot 3.x 必须

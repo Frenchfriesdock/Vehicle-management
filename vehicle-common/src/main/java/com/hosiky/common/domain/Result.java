@@ -1,6 +1,8 @@
 package com.hosiky.common.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
@@ -8,31 +10,48 @@ import java.io.Serializable;
  * 后端统一返回结果
  * @param <T>
  */
+@AllArgsConstructor
+@NoArgsConstructor
 @Data
-public class Result<T> implements Serializable {
+public class Result<T>{
+    private Integer code;
+    private String msg;
+    private T data;
 
-    private Integer code; //编码：1成功，0和其它数字为失败
-    private String msg; //错误信息
-    private T data; //数据
+    private static final String SUCCESS = "success";
 
     public static <T> Result<T> success() {
-        Result<T> result = new Result<T>();
-        result.code = 1;
-        return result;
+        return new Result<>(200, SUCCESS, null);
+    }
+    public static <T> Result<T> success(T data) {
+        return new Result<>(200, SUCCESS, data);
+    }
+    public static <T> Result<T> success(String msg, T data) {
+        return new Result<>(200, msg, data);
+    }
+    public static <T> Result<T> success(Integer code) {
+        return new Result<>(code, SUCCESS, null);
     }
 
-    public static <T> Result<T> success(T object) {
-        Result<T> result = new Result<T>();
-        result.data = object;
-        result.code = 1;
-        return result;
-    }
-
+    // error 500
     public static <T> Result<T> error(String msg) {
-        Result result = new Result();
-        result.msg = msg;
-        result.code = 0;
-        return result;
+        return new Result<>(500, msg, null);
+    }
+
+    public static <T> Result<T> error() {
+        return new Result<>(500,"内部服务器错误", null);
+    }
+
+    public static <T> Result<T> error(Integer code, String msg, T data) {
+        return new Result<>(code, msg, data);
+    }
+
+    public static <T> Result<T> error(Integer code, String msg) {
+        return new Result<>(code, msg, null);
+    }
+
+    public static <T> Result<T> of(Integer code, String msg, T data) {
+        return new Result<>(code, msg, data);
     }
 
 }

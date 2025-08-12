@@ -54,3 +54,4 @@ auth:
     - /api/car/list
     - /api/seller/login
     - /api/seller/register
+    - /**

@@ -93,4 +93,14 @@ public class SellersController {
         sellersService.sendCode(email);
         return Result.success();
     }
+
+
+    /**
+     * 有个这个就不需要手动去给一个Reuslt的封装的返回值，会自动生成一个出来
+     * @return
+     */
+    @PostMapping("/hello")
+    public String SayHello() {
+        return "hello";
+    }
 }
