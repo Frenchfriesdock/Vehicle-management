@@ -67,7 +67,7 @@ springdoc:
   group-configs:
     - group: 'default'  # 接口分组
       paths-to-match: '/**'  # 匹配所有接口
-      packages-to-scan: com.hosiky.carUser.controller  # 扫描的controller包
+      packages-to-scan: com.hosiky.sellers.controller  # 扫描的controller包
 
 # JWT配置
 jwt:

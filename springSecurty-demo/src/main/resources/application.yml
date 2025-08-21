@@ -1,0 +1,57 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: springSecurity-demo  # 服务名称（nacos注册用）
+  datasource:  # 数据库配置
+    driver-class-name: com.mysql.cj.jdbc.Driver  # MySQL8+ 驱动
+    url: jdbc:mysql://localhost:3306/springsecuritystudy?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai  # 补充时区和编码参数
+    username: root
+    password: 1234
+  data:
+    redis:
+      host: 127.0.0.1
+      port: 6379
+
+
+# Knife4j/Swagger配置（基于springdoc-openapi）
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html  # swagger-ui访问路径
+    tags-sorter: alpha  # 标签排序
+    operations-sorter: alpha  # 接口排序
+  api-docs:
+    path: /v3/api-docs  # 接口文档JSON路径
+  group-configs:
+    - group: 'default'  # 接口分组
+      paths-to-match: '/**'  # 匹配所有接口
+      packages-to-scan: com.hosiky.common.controller  # 扫描的controller包
+
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml  # mapper.xml文件路径
+  configuration:
+    map-underscore-to-camel-case: true  # 关闭驼峰命名转换（根据实际需求调整）
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl  # 控制台打印SQL日志
+  global-config:
+    db-config:
+      id-type: auto  # 主键自增（根据数据库类型调整）
+
+
+oauth2:
+  gitee:
+    clientId: 17fc69c49008d9f69f27a1263e2dee651b9901d50f0836d7579857686d293b6f
+    clientSecret: 7e42560f7ea41a0377002f91d3bcab5763b3bf1f3601d40c40315371c361f440
+    redirectUri: http://localhost:8080/user/login/gitee
+
+logging:
+  level:
+    org:
+      springframework:
+        security: debug
+
+# JWT配置
+jwt:
+  secret-key: "0123456789abcdef0123456789abcdef"
+  ttl: 7200000  # 令牌有效期（7200000毫秒 = 2小时）
+  token-name: token  # 请求头中的令牌键名（如Authorization: token值）

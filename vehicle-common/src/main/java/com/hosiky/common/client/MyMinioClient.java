@@ -16,6 +16,7 @@ import java.util.UUID;
 public class MyMinioClient {
 
     private final MinioClient minioClient;
+
     private final MinioProperties minioProperties;
 
     public String upload(MultipartFile file) throws FileUploadException {

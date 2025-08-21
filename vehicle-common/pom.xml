@@ -99,6 +99,7 @@
             <artifactId>spring-boot-starter-data-redis</artifactId>
             <!-- 与 Spring Boot 版本保持一致，例如 3.1.2 -->
         </dependency>
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
